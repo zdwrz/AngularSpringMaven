@@ -1,10 +1,23 @@
 <h1>
-  {{title}}
+  {{apple.result}}
 </h1>
 
-{{data1}}
-<input [(ngModel)]="data1" (keyup)="onKey($event)">
+<form (ngSubmit)="onSubmit()" #appleForm="ngForm" id="appForm">
+  <input type="text" class="form-control" id="res"
+         required
+         [(ngModel)]="apple.result" name="res" #spy>
+  <div [hidden]="spy.dirty"
+       class="alert alert-danger">
+    Name is required
+  </div>
 
-<button (click)="onClickMe()">Click me!</button>
+  <input type="text" class="form-control" id="msg"
+         required
+         [(ngModel)]="apple.msg" name="msg" #spy2>
 
-<app-test></app-test>
+</form>
+<button type="submit" class="btn btn-success" form="appForm" [disabled]="!appleForm.form.valid" >Submit</button>
+
+
+<br>TODO: remove this: {{spy.className}}
+<br>TODO: remove this: {{spy2.className}}
